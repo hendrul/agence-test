@@ -1,0 +1,15 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper.extension='css' -> './flow/CSSModule.js.flow'
+module.name_mapper.extension='styl' -> './flow/flow/CSSModule.js.flow'
+module.name_mapper.extension='png' -> './flow/flow/WebpackAsset.js.flow'
+module.name_mapper.extension='jpg' -> './flow/flow/WebpackAsset.js.flow'
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable

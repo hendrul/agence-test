@@ -1,0 +1,25 @@
+{
+  "presets": ["stage-0", "react", "flow", ["env", {
+    "targets": {
+      "node": "current"
+    }
+  }]],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-remove-strict-mode",
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "rewire"
+      ]
+    }
+  },
+  "ignore": [
+    "server/", "dist/"
+  ]
+}
