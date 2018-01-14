@@ -2,6 +2,14 @@ const { Router } = require('express')
 const { crudGeneratorMiddleware } = require('./crud-generator.js')
 
 const router = Router()
-router.use(crudGeneratorMiddleware())
+const basePath = '/api'
+router.use(basePath, crudGeneratorMiddleware())
+router.get(basePath, (req, res) => {
+  let endpoints = []
+  for(let model of req.model) {
+    endpoints.push(`${basePath}/${model.slug}`)
+  }
+  res.json({ endpoints })
+})
 
 module.exports = router
