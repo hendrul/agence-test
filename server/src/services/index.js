@@ -5,8 +5,8 @@ const router = Router()
 const basePath = '/api'
 router.use(basePath, crudGeneratorMiddleware())
 router.get(basePath, (req, res) => {
-  let endpoints = []
-  for(let model of req.model) {
+  const endpoints = []
+  for (const model of req.model) {
     endpoints.push(`${basePath}/${model.slug}`)
   }
   res.json({ endpoints })
