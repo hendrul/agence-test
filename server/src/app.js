@@ -34,7 +34,10 @@ app.use(bodyParser.json({limit: '1mb'}))
 app.use(bodyParser.urlencoded({limit: '1mb', extended: false}))
 
 let sqlConfigs = global.configs.data.sql
-let modelInstance = model.init( sqlConfigs[sqlConfigs._active] )
+if(!sqlConfigs.$activeProfile) throw new Error('Debe seleccionar un perfil de conexion con el atributo "$activeProfile" en "app-config.json"')
+let activeSqlProfile = sqlConfigs[sqlConfigs.$activeProfile]
+if(!activeSqlProfile) throw new Error(`No se encontro el perfil de conexion ${sqlConfigs.$activeProfile}`)
+let modelInstance = model.init( activeSqlProfile )
 app.use( (req, res, next) => {
   req.model = modelInstance
   next()
