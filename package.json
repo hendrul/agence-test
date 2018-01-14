@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "public/bundle.js",
+  "engines": {
+    "node": "8.7.0"
+  },
   "scripts": {
     "test": "jest",
     "build": "webpack --colors",
