@@ -7,11 +7,12 @@ module.exports = {
   www: path.resolve(__dirname, '../build'),
   data: {
     sql: {
-      $activeProfile: 'mysqlDevelopment',
+      $activeProfile: 'sqliteDevelopment',
       sqliteDevelopment: {
         user: null,
         password: null,
-        database: 'agence',
+        database: 'null',
+        storage: './agence.db',
         dialect: 'sqlite',
         define: {
           timestamps: false,
@@ -84,7 +85,6 @@ module.exports = {
           max: 50,
         },
       },
-
     },
   },
 }
