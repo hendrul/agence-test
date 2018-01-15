@@ -1,14 +1,18 @@
 {
-  "name": "signup",
-  "version": "1.0.0",
-  "description": "",
+  "name": "agence",
+  "version": "1.1.0",
+  "description": "CAOL Agence",
   "main": "public/bundle.js",
+  "engines": {
+    "node": "8.7.0"
+  },
   "scripts": {
     "test": "jest",
     "build": "webpack --colors",
+    "postinstall": "yarn run build && cd ./server && yarn --production && yarn run build",
     "dev-server": "webpack-dev-server --colors --progress",
-    "server": "nodemon --exec npm run babel-node -- server/src/server.js",
-    "start": "npm run dev-server"
+    "server": "cd ./server && yarn serve",
+    "start": "npm run server"
   },
   "author": "",
   "license": "ISC",
