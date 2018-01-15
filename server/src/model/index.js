@@ -75,6 +75,15 @@ module.exports = {
       }
     }
 
+    // Ajustar los nombres de ruta de los reportes para que sean snakecase por defecto
+    // o en caso que el reporte especifique un "slug" tomamos este
+    for (const model of models) {
+      const reports = model.options.reports || {}
+      model.options.reports = Object.keys(reports).reduce((memo, rptName) => (
+        Object.assign(memo, { [reports[rptName].slug || _.snakeCase(rptName)]: reports[rptName] })
+      ), {})
+    }
+
     models.Sequelize = Sequelize
     models.sequelize = sequelize
     models.transaction = sequelize::sequelize.transaction
