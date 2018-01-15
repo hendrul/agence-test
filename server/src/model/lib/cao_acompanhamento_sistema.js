@@ -1,36 +1,31 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoAcompanhamentoSistema', {
-		coAcompanhamento: {
-			type: DataTypes.INTEGER(10).UNSIGNED,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_acompanhamento'
-		},
-		email: {
-			type: DataTypes.STRING(40),
-			allowNull: true,
-			field: 'email'
-		},
-		senha: {
-			type: DataTypes.STRING(20),
-			allowNull: true,
-			field: 'senha'
-		},
-		coSistema: {
-			type: DataTypes.BIGINT,
-			allowNull: true,
-			defaultValue: '0',
-			field: 'co_sistema'
-		},
-		status: {
-			type: DataTypes.CHAR(2),
-			allowNull: true,
-			field: 'status'
-		}
-	}, {
-		tableName: 'cao_acompanhamento_sistema'
-	});
+  return sequelize.define('cao_acompanhamento_sistema', {
+    co_acompanhamento: {
+      type: DataTypes.INTEGER(10).UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    email: {
+      type: DataTypes.STRING(40),
+      allowNull: true
+    },
+    senha: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+    },
+    co_sistema: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      defaultValue: '0'
+    },
+    status: {
+      type: DataTypes.CHAR(2),
+      allowNull: true
+    }
+  }, {
+    tableName: 'cao_acompanhamento_sistema'
+  });
 };

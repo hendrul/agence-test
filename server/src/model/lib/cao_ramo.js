@@ -1,21 +1,19 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoRamo', {
-		coRamo: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_ramo'
-		},
-		dsRamo: {
-			type: DataTypes.STRING(60),
-			allowNull: false,
-			defaultValue: '',
-			field: 'ds_ramo'
-		}
-	}, {
-		tableName: 'cao_ramo'
-	});
+  return sequelize.define('cao_ramo', {
+    co_ramo: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    ds_ramo: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+      defaultValue: ''
+    }
+  }, {
+    tableName: 'cao_ramo'
+  });
 };

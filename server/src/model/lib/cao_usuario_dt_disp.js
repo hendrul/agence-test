@@ -1,32 +1,28 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoUsuarioDtDisp', {
-		coDtDisp: {
-			type: DataTypes.INTEGER(6).UNSIGNED,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_dt_disp'
-		},
-		coUsuario: {
-			type: DataTypes.STRING(20),
-			allowNull: true,
-			field: 'co_usuario'
-		},
-		dtDisp: {
-			type: DataTypes.DATEONLY,
-			allowNull: false,
-			defaultValue: '0000-00-00',
-			field: 'dt_disp'
-		},
-		dtAlt: {
-			type: DataTypes.DATEONLY,
-			allowNull: false,
-			defaultValue: '0000-00-00',
-			field: 'dt_alt'
-		}
-	}, {
-		tableName: 'cao_usuario_dt_disp'
-	});
+  return sequelize.define('cao_usuario_dt_disp', {
+    co_dt_disp: {
+      type: DataTypes.INTEGER(6).UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    co_usuario: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+    },
+    dt_disp: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: '1970-01-01'
+    },
+    dt_alt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: '1970-01-01'
+    }
+  }, {
+    tableName: 'cao_usuario_dt_disp'
+  });
 };

@@ -1,54 +1,46 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoBonusStatus', {
-		id: {
-			type: DataTypes.INTEGER(128),
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'id'
-		},
-		coUsuario: {
-			type: DataTypes.STRING(128),
-			allowNull: false,
-			defaultValue: '',
-			field: 'co_usuario'
-		},
-		dataSolic: {
-			type: DataTypes.DATEONLY,
-			allowNull: false,
-			defaultValue: '0000-00-00',
-			field: 'data_solic'
-		},
-		mes: {
-			type: DataTypes.STRING(128),
-			allowNull: false,
-			defaultValue: '',
-			field: 'mes'
-		},
-		valor: {
-			type: DataTypes.STRING(128),
-			allowNull: false,
-			defaultValue: '',
-			field: 'valor'
-		},
-		isSolic: {
-			type: DataTypes.STRING(10),
-			allowNull: true,
-			field: 'is_solic'
-		},
-		isPg: {
-			type: DataTypes.STRING(10),
-			allowNull: true,
-			field: 'is_pg'
-		},
-		isHoras: {
-			type: DataTypes.STRING(10),
-			allowNull: true,
-			field: 'is_horas'
-		}
-	}, {
-		tableName: 'cao_bonus_status'
-	});
+  return sequelize.define('cao_bonus_status', {
+    id: {
+      type: DataTypes.INTEGER(128),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    co_usuario: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+      defaultValue: ''
+    },
+    data_solic: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: '1970-01-01'
+    },
+    mes: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+      defaultValue: ''
+    },
+    valor: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+      defaultValue: ''
+    },
+    is_solic: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    is_pg: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    is_horas: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    }
+  }, {
+    tableName: 'cao_bonus_status'
+  });
 };

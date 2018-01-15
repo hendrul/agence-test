@@ -1,34 +1,30 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoMenuContador', {
-		coUsuario: {
-			type: DataTypes.STRING(20),
-			allowNull: false,
-			defaultValue: '',
-			primaryKey: true,
-			field: 'co_usuario'
-		},
-		coMenu: {
-			type: DataTypes.INTEGER(3).UNSIGNED,
-			allowNull: false,
-			defaultValue: '0',
-			primaryKey: true,
-			field: 'co_menu'
-		},
-		nuPontos: {
-			type: DataTypes.INTEGER(3),
-			allowNull: false,
-			defaultValue: '0',
-			field: 'nu_pontos'
-		},
-		inProcessado: {
-			type: DataTypes.INTEGER(1).UNSIGNED,
-			allowNull: false,
-			defaultValue: '0',
-			field: 'in_processado'
-		}
-	}, {
-		tableName: 'cao_menu_contador'
-	});
+  return sequelize.define('cao_menu_contador', {
+    co_usuario: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      defaultValue: '',
+      primaryKey: true
+    },
+    co_menu: {
+      type: DataTypes.INTEGER(3).UNSIGNED,
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true
+    },
+    nu_pontos: {
+      type: DataTypes.INTEGER(3),
+      allowNull: false,
+      defaultValue: '0'
+    },
+    in_processado: {
+      type: DataTypes.INTEGER(1).UNSIGNED,
+      allowNull: false,
+      defaultValue: '0'
+    }
+  }, {
+    tableName: 'cao_menu_contador'
+  });
 };

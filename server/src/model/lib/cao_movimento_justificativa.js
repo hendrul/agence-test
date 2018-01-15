@@ -1,32 +1,28 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoMovimentoJustificativa', {
-		coMovimentoJustificativa: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_movimento_justificativa'
-		},
-		coMovimento: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			defaultValue: '0',
-			field: 'co_movimento'
-		},
-		nuOs: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			defaultValue: '0',
-			field: 'nu_os'
-		},
-		dsJustificativa: {
-			type: DataTypes.TEXT,
-			allowNull: false,
-			field: 'ds_justificativa'
-		}
-	}, {
-		tableName: 'cao_movimento_justificativa'
-	});
+  return sequelize.define('cao_movimento_justificativa', {
+    co_movimento_justificativa: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    co_movimento: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      defaultValue: '0'
+    },
+    nu_os: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      defaultValue: '0'
+    },
+    ds_justificativa: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    }
+  }, {
+    tableName: 'cao_movimento_justificativa'
+  });
 };

@@ -1,43 +1,38 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoConhecimentosFontes', {
-		idfonte: {
-			type: DataTypes.INTEGER(11),
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'idfonte'
-		},
-		idconhecimento: {
-			type: DataTypes.INTEGER(11),
-			allowNull: false,
-			defaultValue: '0',
-			references: {
-				model: 'cao_conhecimentos',
-				key: 'idconhecimento'
-			},
-			field: 'idconhecimento'
-		},
-		datahora: {
-			type: DataTypes.DATE,
-			allowNull: false,
-			defaultValue: '0000-00-00 00:00:00',
-			field: 'datahora'
-		},
-		arquivo: {
-			type: DataTypes.STRING(50),
-			allowNull: false,
-			defaultValue: '',
-			field: 'arquivo'
-		},
-		caminho: {
-			type: DataTypes.STRING(50),
-			allowNull: false,
-			defaultValue: '',
-			field: 'caminho'
-		}
-	}, {
-		tableName: 'cao_conhecimentos_fontes'
-	});
+  return sequelize.define('cao_conhecimentos_fontes', {
+    idfonte: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    idconhecimento: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: '0',
+      references: {
+        model: 'cao_conhecimentos',
+        key: 'idconhecimento'
+      }
+    },
+    datahora: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: '1970-01-01 00:00:00'
+    },
+    arquivo: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: ''
+    },
+    caminho: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: ''
+    }
+  }, {
+    tableName: 'cao_conhecimentos_fontes'
+  });
 };

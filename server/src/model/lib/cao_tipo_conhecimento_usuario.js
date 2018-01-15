@@ -1,26 +1,23 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoTipoConhecimentoUsuario', {
-		coConhecimento: {
-			type: DataTypes.INTEGER(1).UNSIGNED,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_conhecimento'
-		},
-		dsConhecimento: {
-			type: DataTypes.STRING(20),
-			allowNull: true,
-			field: 'ds_conhecimento'
-		},
-		coSistema: {
-			type: DataTypes.INTEGER(1).UNSIGNED,
-			allowNull: false,
-			defaultValue: '0',
-			field: 'co_sistema'
-		}
-	}, {
-		tableName: 'cao_tipo_conhecimento_usuario'
-	});
+  return sequelize.define('cao_tipo_conhecimento_usuario', {
+    co_conhecimento: {
+      type: DataTypes.INTEGER(1).UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    ds_conhecimento: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+    },
+    co_sistema: {
+      type: DataTypes.INTEGER(1).UNSIGNED,
+      allowNull: false,
+      defaultValue: '0'
+    }
+  }, {
+    tableName: 'cao_tipo_conhecimento_usuario'
+  });
 };

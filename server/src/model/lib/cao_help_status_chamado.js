@@ -1,21 +1,19 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoHelpStatusChamado', {
-		coStatus: {
-			type: DataTypes.INTEGER(3),
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_status'
-		},
-		dsStatus: {
-			type: DataTypes.STRING(50),
-			allowNull: false,
-			defaultValue: '0',
-			field: 'ds_status'
-		}
-	}, {
-		tableName: 'cao_help_status_chamado'
-	});
+  return sequelize.define('cao_help_status_chamado', {
+    co_status: {
+      type: DataTypes.INTEGER(3),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    ds_status: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: '0'
+    }
+  }, {
+    tableName: 'cao_help_status_chamado'
+  });
 };

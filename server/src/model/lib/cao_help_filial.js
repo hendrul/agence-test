@@ -1,33 +1,29 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoHelpFilial', {
-		coFilial: {
-			type: DataTypes.INTEGER(4).UNSIGNED,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_filial'
-		},
-		noFilial: {
-			type: DataTypes.STRING(70),
-			allowNull: false,
-			defaultValue: '',
-			field: 'no_filial'
-		},
-		coCliente: {
-			type: DataTypes.INTEGER(11),
-			allowNull: false,
-			defaultValue: '0',
-			field: 'co_cliente'
-		},
-		estado: {
-			type: DataTypes.CHAR(2),
-			allowNull: false,
-			defaultValue: '',
-			field: 'estado'
-		}
-	}, {
-		tableName: 'cao_help_filial'
-	});
+  return sequelize.define('cao_help_filial', {
+    co_filial: {
+      type: DataTypes.INTEGER(4).UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    no_filial: {
+      type: DataTypes.STRING(70),
+      allowNull: false,
+      defaultValue: ''
+    },
+    co_cliente: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: '0'
+    },
+    estado: {
+      type: DataTypes.CHAR(2),
+      allowNull: false,
+      defaultValue: ''
+    }
+  }, {
+    tableName: 'cao_help_filial'
+  });
 };

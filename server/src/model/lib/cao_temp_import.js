@@ -1,21 +1,19 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoTempImport', {
-		codigo: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'codigo'
-		},
-		descricao: {
-			type: DataTypes.STRING(60),
-			allowNull: false,
-			defaultValue: '',
-			field: 'descricao'
-		}
-	}, {
-		tableName: 'cao_temp_import'
-	});
+  return sequelize.define('cao_temp_import', {
+    codigo: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    descricao: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+      defaultValue: ''
+    }
+  }, {
+    tableName: 'cao_temp_import'
+  });
 };

@@ -1,28 +1,25 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoComissao', {
-		coComissao: {
-			type: DataTypes.INTEGER(11),
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_comissao'
-		},
-		coFatura: {
-			type: DataTypes.INTEGER(11),
-			allowNull: false,
-			defaultValue: '0',
-			unique: true,
-			field: 'co_fatura'
-		},
-		dtEfetuado: {
-			type: DataTypes.DATEONLY,
-			allowNull: false,
-			defaultValue: '0000-00-00',
-			field: 'dt_efetuado'
-		}
-	}, {
-		tableName: 'cao_comissao'
-	});
+  return sequelize.define('cao_comissao', {
+    co_comissao: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    co_fatura: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: '0',
+      unique: true
+    },
+    dt_efetuado: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: '1970-01-01'
+    }
+  }, {
+    tableName: 'cao_comissao'
+  });
 };

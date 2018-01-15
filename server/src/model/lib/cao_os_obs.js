@@ -1,38 +1,33 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoOsObs', {
-		coObs: {
-			type: DataTypes.INTEGER(8),
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_obs'
-		},
-		coOs: {
-			type: DataTypes.INTEGER(8),
-			allowNull: true,
-			defaultValue: '0',
-			field: 'co_os'
-		},
-		coUsuario: {
-			type: DataTypes.STRING(80),
-			allowNull: true,
-			defaultValue: '0',
-			field: 'co_usuario'
-		},
-		descricao: {
-			type: DataTypes.TEXT,
-			allowNull: true,
-			field: 'descricao'
-		},
-		dtObs: {
-			type: DataTypes.DATE,
-			allowNull: true,
-			defaultValue: '0000-00-00 00:00:00',
-			field: 'dt_obs'
-		}
-	}, {
-		tableName: 'cao_os_obs'
-	});
+  return sequelize.define('cao_os_obs', {
+    co_obs: {
+      type: DataTypes.INTEGER(8),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    co_os: {
+      type: DataTypes.INTEGER(8),
+      allowNull: true,
+      defaultValue: '0'
+    },
+    co_usuario: {
+      type: DataTypes.STRING(80),
+      allowNull: true,
+      defaultValue: '0'
+    },
+    descricao: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    dt_obs: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: '1970-01-01 00:00:00'
+    }
+  }, {
+    tableName: 'cao_os_obs'
+  });
 };

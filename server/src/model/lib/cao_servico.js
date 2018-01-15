@@ -1,21 +1,19 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoServico', {
-		coServico: {
-			type: DataTypes.INTEGER(5),
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_servico'
-		},
-		dsServico: {
-			type: DataTypes.STRING(50),
-			allowNull: false,
-			defaultValue: '',
-			field: 'ds_servico'
-		}
-	}, {
-		tableName: 'cao_servico'
-	});
+  return sequelize.define('cao_servico', {
+    co_servico: {
+      type: DataTypes.INTEGER(5),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    ds_servico: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: ''
+    }
+  }, {
+    tableName: 'cao_servico'
+  });
 };

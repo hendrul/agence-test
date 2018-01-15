@@ -1,39 +1,34 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoBonus', {
-		bonCategoria: {
-			type: DataTypes.INTEGER(3),
-			allowNull: false,
-			defaultValue: '0',
-			primaryKey: true,
-			field: 'bon_categoria'
-		},
-		bonInicio: {
-			type: DataTypes.INTEGER(3),
-			allowNull: false,
-			defaultValue: '0',
-			primaryKey: true,
-			field: 'bon_inicio'
-		},
-		bonFim: {
-			type: DataTypes.INTEGER(3),
-			allowNull: false,
-			defaultValue: '0',
-			primaryKey: true,
-			field: 'bon_fim'
-		},
-		bonValorSem: {
-			type: DataTypes.FLOAT,
-			allowNull: true,
-			field: 'bon_valor_sem'
-		},
-		bonValorFimsem: {
-			type: DataTypes.FLOAT,
-			allowNull: true,
-			field: 'bon_valor_fimsem'
-		}
-	}, {
-		tableName: 'cao_bonus'
-	});
+  return sequelize.define('cao_bonus', {
+    bon_categoria: {
+      type: DataTypes.INTEGER(3),
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true
+    },
+    bon_inicio: {
+      type: DataTypes.INTEGER(3),
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true
+    },
+    bon_fim: {
+      type: DataTypes.INTEGER(3),
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true
+    },
+    bon_valor_sem: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    bon_valor_fimsem: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    }
+  }, {
+    tableName: 'cao_bonus'
+  });
 };

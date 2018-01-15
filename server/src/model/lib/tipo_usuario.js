@@ -1,28 +1,25 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('tipoUsuario', {
-		coTipoUsuario: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			defaultValue: '0',
-			primaryKey: true,
-			field: 'co_tipo_usuario'
-		},
-		dsTipoUsuario: {
-			type: DataTypes.STRING(32),
-			allowNull: false,
-			defaultValue: '',
-			field: 'ds_tipo_usuario'
-		},
-		coSistema: {
-			type: DataTypes.BIGINT,
-			allowNull: false,
-			defaultValue: '0',
-			primaryKey: true,
-			field: 'co_sistema'
-		}
-	}, {
-		tableName: 'tipo_usuario'
-	});
+  return sequelize.define('tipo_usuario', {
+    co_tipo_usuario: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true
+    },
+    ds_tipo_usuario: {
+      type: DataTypes.STRING(32),
+      allowNull: false,
+      defaultValue: ''
+    },
+    co_sistema: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true
+    }
+  }, {
+    tableName: 'tipo_usuario'
+  });
 };

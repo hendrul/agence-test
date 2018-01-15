@@ -1,35 +1,30 @@
-/* jshint indent: 1 */
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('caoObsSistema', {
-		coObs: {
-			type: DataTypes.INTEGER(10).UNSIGNED,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-			field: 'co_obs'
-		},
-		descricao: {
-			type: DataTypes.TEXT,
-			allowNull: true,
-			field: 'descricao'
-		},
-		coSistema: {
-			type: DataTypes.BIGINT,
-			allowNull: true,
-			field: 'co_sistema'
-		},
-		coUsuario: {
-			type: DataTypes.STRING(20),
-			allowNull: true,
-			field: 'co_usuario'
-		},
-		dtObs: {
-			type: DataTypes.DATE,
-			allowNull: true,
-			field: 'dt_obs'
-		}
-	}, {
-		tableName: 'cao_obs_sistema'
-	});
+  return sequelize.define('cao_obs_sistema', {
+    co_obs: {
+      type: DataTypes.INTEGER(10).UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    descricao: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    co_sistema: {
+      type: DataTypes.BIGINT,
+      allowNull: true
+    },
+    co_usuario: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+    },
+    dt_obs: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }
+  }, {
+    tableName: 'cao_obs_sistema'
+  });
 };
