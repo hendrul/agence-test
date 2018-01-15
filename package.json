@@ -1,7 +1,7 @@
 {
-  "name": "signup",
+  "name": "agence",
   "version": "1.0.0",
-  "description": "",
+  "description": "CAOL Agence",
   "main": "public/bundle.js",
   "engines": {
     "node": "8.7.0"
