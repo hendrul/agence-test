@@ -25,6 +25,8 @@ const generateCRUDService = (model, path) => {
   router.model = model.name
   router.endpoint = path || `/${_.snakeCase(model.name)}`
   router.get(router.endpoint, getAll)
+  router.get(`${router.endpoint}/reports`, getReport)
+  router.get(`${router.endpoint}/reports/:report`, getReport)
   router.get(`${router.endpoint}/:id`, get)
   router.post(router.endpoint, create)
   router.put(`${router.endpoint}/:id`, update)
@@ -60,6 +62,45 @@ const generateCRUDService = (model, path) => {
     res.json(found.get({ plain: true }))
   }
 
+  async function getReport(req, res) {
+    const report = req.params.report
+    const reports = model.options.reports
+    try {
+      if (!report) {
+        res.json(Object.keys(reports).reduce((memo, rptName) => (
+          Object.assign(memo, {
+            [rptName]: {
+              args: reports[rptName].args || {},
+            },
+          })
+        ), {}))
+      } else if (reports[report]) {
+        const rptFunc = reports[report].method
+        if (typeof rptFunc !== 'function') {
+          await throwHttpError(422, 'Debe definir una funcion para el reporte')
+        }
+
+        const rptArgs = reports[report].args
+        let validArgs = {}
+        if (rptArgs) {
+          validArgs = await Object.keys(rptArgs).reduce(async (memoP, argName) => {
+            const memo = await memoP
+            const rptArg = rptArgs[argName]
+            if (rptArg.required && !req.query[argName]) {
+              await throwHttpError(422, `El reporte "${report}" require el argumento "${argName}"`)
+            }
+            return memo.concat(req.query[argName])
+          }, [])
+        }
+        const result = await reports[report].method(...validArgs)
+        res.json(result)
+      } else {
+        await throwHttpError(404)
+      }
+    } catch (err) {
+      await sendHttpError(err, res)
+    }
+  }
 
   // ----------- CREATE ----------------------
   async function create(req, res) {

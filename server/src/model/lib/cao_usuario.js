@@ -9,8 +9,19 @@ module.exports.default = (sequelize: Sequelize): Model => {
   @Options({
     tableName: 'cao_usuario',
     reports: {
-      comercialPerformance: (fecIni, fecFin) => {
-        return sequelize.query(`
+      comercialPerformance: {
+        slug: 'comercial_performance',
+        args: {
+          fecIni: {
+            type: 'date',
+            required: true,
+          },
+          fecFin: {
+            type: 'date',
+            required: true,
+          },
+        },
+        method: (fecIni, fecFin) => sequelize.query(`
           SELECT 
               co_usuario codigo,
               no_usuario usuario,
@@ -18,7 +29,7 @@ module.exports.default = (sequelize: Sequelize): Model => {
               receitaLiquida,
               custoFixo,
               comissao,
-              round(sum(receitaLiquida-(custoFixo+comissao)), 2) lucro
+              sum(receitaLiquida-(custoFixo+comissao)) lucro
           FROM (
              SELECT
                  co_usuario,
@@ -33,8 +44,8 @@ module.exports.default = (sequelize: Sequelize): Model => {
                    cao_salario.brut_salario custoFixo,
                    ${sequelize.options.dialect === 'sqlite' ? 'strftime("%Y-%m", cao_fatura.data_emissao) refmes,' : ''}
                    ${sequelize.options.dialect === 'mysql' ? 'DATE_FORMAT(cao_fatura.data_emissao, "%Y-%m") refmes,' : ''}
-                   round(cao_fatura.valor - (cao_fatura.valor * cao_fatura.total_imp_inc / 100), 2) receitaLiquida,
-                  round((cao_fatura.valor - cao_fatura.valor * cao_fatura.total_imp_inc / 100) * cao_fatura.comissao_cn / 100, 2) comissao
+                   (cao_fatura.valor - (cao_fatura.valor * cao_fatura.total_imp_inc / 100)) receitaLiquida,
+                   ((cao_fatura.valor - cao_fatura.valor * cao_fatura.total_imp_inc / 100) * (cao_fatura.comissao_cn / 100)) comissao
               FROM cao_usuario
                 JOIN permissao_sistema ON (cao_usuario.co_usuario = permissao_sistema.co_usuario)
                 JOIN (cao_os
@@ -51,7 +62,7 @@ module.exports.default = (sequelize: Sequelize): Model => {
           ) AS r2
           GROUP BY codigo, usuario, refmes, custoFixo, receitaLiquida, comissao
           ORDER BY refmes
-        `, { type: sequelize.QueryTypes.SELECT })
+          `, { type: sequelize.QueryTypes.SELECT }),
       },
     },
     validate: {
