@@ -31,7 +31,7 @@ const corsOpts = { origin: ['*'] }
 app.use(cors(corsOpts))
 app.use(cookieParser())
 app.use(bodyParser.json({ limit: '1mb' }))
-app.use(bodyParser.urlencoded({ limit: '1mb', extended: false }))
+app.use(bodyParser.urlencoded({ limit: '1mb' }))
 
 const sqlConfigs = global.configs.data.sql
 if (!sqlConfigs.$activeProfile) throw new Error('Debe seleccionar un perfil de conexion con el atributo "$activeProfile" en "app-config.json"')
