@@ -8,8 +8,8 @@ const methodOverride = require('method-override')
 const _ = require('lodash')
 
 const appConfig = require('../app-config')
-const ws = require('./services')
-const model = require('./model')
+const ws = require('./lib/services')
+const model = require('./lib/model')
 
 const app = express()
 global.configs = appConfig

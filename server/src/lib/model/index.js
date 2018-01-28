@@ -9,8 +9,13 @@ const MODELS_DIR = './lib'
 const SEQUELIZE_NS = 'sequelize-ns'
 
 module.exports = {
-  init(config) {
+  initOnce(config) {
+    if (module.exports.models) {
+      return module.exports.models
+    }
     const sequelize = new Sequelize(config.database, config.user, config.password, config)
+    //
+    if (global.watcher) global.watcher.once('change', () => sequelize.close())
     // Configuramos CLS
     sequelize.cls = createNamespace(SEQUELIZE_NS)
     global.Promise = Sequelize.Promise
@@ -52,12 +57,12 @@ module.exports = {
       // Ejecutamos las asociaciones de todos los modelos
       if (model.associate) model.associate()
 
-      //Cambiamos los nombres de modelos en referencias por su nombre de tabla
-      for (let attrName in model.rawAttributes) {
-        let attr = model.rawAttributes[attrName]
+      // Cambiamos los nombres de modelos en referencias por su nombre de tabla
+      for (const attrName in model.rawAttributes) {
+        const attr = model.rawAttributes[attrName]
         if (attr.references) {
-          let references = typeof attr.references == 'string' ?  { model: attr.references } : attr.references
-          let refModel = sequelize.models[references.model]
+          const references = typeof attr.references === 'string' ? { model: attr.references } : attr.references
+          const refModel = sequelize.models[references.model]
           if (refModel !== undefined) {
             attr.references = {
               model: refModel.tableName,
@@ -94,6 +99,8 @@ module.exports = {
       })
       return this.sync(opts)
     }
-    return models
+    module.exports.config = config
+    module.exports.models = models
+    return module.exports.models
   },
 }
