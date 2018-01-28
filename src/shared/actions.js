@@ -110,16 +110,12 @@ export function mergeActionModules(...actionModules) {
   return mergedActions
 }
 
-function checkActionModule(actionModule) {
-  for (const attr in actionModule) {
-    if (!['actionCreators', 'actionHandlers', 'transitions', 'selectors',
-      'defaults', 'sideEffects', 'meta', 'includes'].includes(attr)) { throw new Error(`Invalid action module config attribute found "${attr}"`) }
-  }
-  return actionModule
-}
-
 function resolveActionModule(actionModule, path) {
-  actionModule = checkActionModule(actionModule(path))
+  try {
+    actionModule = actionModule(path)
+  } catch (err) {
+    actionModule = new actionModule(path)
+  }
   // Merge includes recursively
   actionModule = Object.assign({}, actionModule, {
     includes: (actionModule.includes || [])
