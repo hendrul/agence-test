@@ -11,7 +11,7 @@ module.exports = {
       sqliteDevelopment: {
         user: null,
         password: null,
-        database: 'null',
+        database: './agence.db',
         storage: './agence.db',
         dialect: 'sqlite',
         define: {

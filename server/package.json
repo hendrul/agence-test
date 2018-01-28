@@ -5,10 +5,13 @@
   "scripts": {
     "test": "jest",
     "build": "babel src/ -d build",
-    "genmodel": "rm -rf src/model/generated; sequelize-auto -h localhost -u root -x root -d agence -e mysql -o 'src/model/generated'",
+    "genmodel": "sh ./bin/genmodel.sh",
     "serve": "node build/server.js",
     "start": "babel-node src/server.js",
     "debug": "babel-node --inspect src/server.js"
+  },
+  "bin": {
+    "genmodel": "./bin/genmodel.sh"
   },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
