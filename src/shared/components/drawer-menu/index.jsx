@@ -27,13 +27,14 @@ const menues = requireCtx
     return menu
   })
 
-const Menu = ({ id = 1, logo, docked = true, open = true, width = 255 }) => {
+const Menu = (props) => {
+  const { id = 1, logo, docked = true, open = true, width = 255, children } = props
   let Menu = menues.find(menu => menu.$id == id)
   if(!Menu) throw new Error(`Menu No.(${id}) not found`)
-  let {id:_id, ...props} = arguments
+  let {id:_id, ...restProps} = props
   return (
     <div>
-      <Drawer {...props}>
+      <Drawer {...restProps}>
         <Flex column>
           <VSpace2 />
           <Flex>
@@ -56,6 +57,7 @@ const Menu = ({ id = 1, logo, docked = true, open = true, width = 255 }) => {
         <Divider />
         {<Menu/>||<div>No menu found</div>}
       </Drawer>
+      {children}
     </div>
   )
 }
