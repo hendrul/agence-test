@@ -1,10 +1,9 @@
-import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
   entry: [
     'babel-polyfill',
-    './src/app.jsx',
+    `${__dirname}/src/app.jsx`,
   ],
   target: 'web',
   output: {
@@ -16,8 +15,8 @@ export default {
     extensions: ['*', '.js', '.jsx'],
     modules: ['node_modules'],
     alias: {
-      shared: path.resolve(__dirname, 'src/shared'),
-      assets: path.resolve(__dirname, 'assets'),
+      shared: `${__dirname}/src/shared`,
+      assets: `${__dirname}/assets`,
     },
   },
   module: {
@@ -33,7 +32,7 @@ export default {
           'style-loader/url',
           'url-loader?limit=10000',
           'extract-loader',
-          `css-loader?root=${path.resolve(__dirname, 'assets')}`,
+          `css-loader?root=${__dirname}/assets}`,
         ],
       },
       {
@@ -84,9 +83,9 @@ export default {
     inline: true,
     disableHostCheck: true,
     historyApiFallback: true,
-    contentBase: './build',
+    contentBase: `${__dirname}/build`,
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './index.html' }),
+    new HtmlWebpackPlugin({ template: `${__dirname}/index.html` }),
   ],
 }

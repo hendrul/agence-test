@@ -2,7 +2,8 @@ module.exports = {
   "parser": "babel-eslint",
   "extends": "airbnb",
   "globals": {
-    "alert": true
+    "alert": true,
+    "watcher": true,
   },
   "rules": {
     //eslint rules
