@@ -1,52 +1,22 @@
 import React, { Component } from 'react'
-import path from 'path'
-import { Tab } from 'material-ui/Tabs'
-import { Route } from 'react-router-dom'
-import { push, LOCATION_CHANGE } from 'react-router-redux'
-import { connect } from 'react-redux'
-import ui from 'redux-ui'
+import ReportsIcon from 'react-icons/lib/fa/line-chart'
+import DummyIcon from 'react-icons/lib/fa/chain-broken'
 
-import TabBar from 'shared/components/tab-bar'
 import Reports from './Reports'
+import asModule from 'shared/components/module-hoc'
 
-@ui({
-  key: 'comercial',
-  state: {
-    activeTab: 'relatorio',
-  },
-  reducer: (state, { type, payload: location }) => {
-    if (type === LOCATION_CHANGE) {
-      return {
-        ...state,
-        ...location.state,
-      }
-    }
-    return state
-  },
-})
 class ComercialModule extends Component {
-  componentWillReceiveProps(nextProps) {
-    const nextPath = nextProps.location.pathname
-    if (/^\/comercial$/.test(nextPath)) { this.onChange(nextProps.ui.activeTab) }
+  constructor(props) {
+    super(props)
   }
-
-  onChange = (value) => {
-    this.props.dispatch(push({
-      pathname: path.join(this.props.match.url, value),
-      state: { activeTab: value },
-    }))
-  }
-
   render() {
-    const { match, ui: { activeTab } } = this.props
-    return (
-      <TabBar title="Comercial" onChange={this.onChange} value={activeTab}>
-        <Tab label="Relatorio" value="relatorio">
-          <Route path={`${match.url}/relatorio`} component={Reports} />
-        </Tab>
-      </TabBar>
-    )
+    return [
+      <DummySubModule icon={<DummyIcon />} name="Submodulo 1" slug="submodulo1" />,
+      <DummySubModule icon={<DummyIcon />} name="Submodulo 2" slug="submodulo2" />,
+      <Reports icon={<ReportsIcon />} name="Relatorio" slug="relatorio" default />,
+    ]
   }
 }
+const DummySubModule = () => null
 
-export default connect()(ComercialModule)
+export default asModule('Comercial', 'comercial')(ComercialModule)

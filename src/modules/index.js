@@ -1,11 +1,6 @@
-import _loadable from 'react-loadable'
-
-function loadable(opts) {
-  return _loadable(Object.assign({
-    loading: () => null,
-  }, opts))
-}
+import loadableModule from 'shared/components/loadable-module'
 
 module.exports = {
-  Comercial: loadable({ loader: () => import('./Comercial') }),
+  Home: loadableModule(() => import('./Home')),
+  Comercial: loadableModule(() => import('./Comercial')),
 }
