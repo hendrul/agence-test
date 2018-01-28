@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "Agence Backend",
   "scripts": {
-    "test": "jest",
+    "test": "mocha -r flow-remove-types/register --timeout 5000 --ui bdd src/**/__tests__/**/*.js",
     "build": "babel src/ -d build",
     "genmodel": "sh ./bin/genmodel.sh",
     "serve": "node build/server.js",
@@ -58,10 +58,13 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.54.1",
     "flow-cli": "^0.0.0-pre",
-    "jest": "^20.0.4",
+    "flow-remove-types": "^1.2.3",
+    "mocha": "^5.0.0",
     "mysql": "^2.15.0",
     "pg": "^7.4.1",
     "sequelize-auto": "^0.4.29",
+    "sinon": "^4.2.0",
+    "sinon-chai": "^2.14.0",
     "webpack": "^3.7.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.19.1"
