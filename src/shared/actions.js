@@ -1,7 +1,7 @@
 import path from 'path'
 import { createActions, handleActions } from 'redux-actions'
 import reduceReducers from 'reduce-reducers'
-import { default as _merge } from 'lodash/mergeWith'
+import _merge from 'lodash/mergeWith'
 import _set from 'lodash/set'
 import _omit from 'lodash/omit'
 import _flatten from 'lodash/flatten'
@@ -9,8 +9,8 @@ import _isPlainObject from 'lodash/isPlainObject'
 import _mapValues from 'lodash/mapValues'
 import _mapKeys from 'lodash/mapKeys'
 
-const _get = require('lodash/get')
-const _camelCase = require('lodash/camelCase')
+import _get from 'lodash/get'
+import _camelCase from 'lodash/camelCase'
 
 const assert = console.assert
 
