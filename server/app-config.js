@@ -37,6 +37,10 @@ module.exports = {
           timezone: '-04:30',
         },
         isolationLevel: ISOLATION_LEVELS.READ_COMMITTED,
+        pool: {
+          min: 1,
+          max: 1,
+        },
       },
 
       pgProduction: {
