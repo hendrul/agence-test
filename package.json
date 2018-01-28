@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --colors",
-    "postinstall": "yarn run build && cd ./server && yarn --production && yarn run build",
+    "heroku-postbuild": "yarn run build && cd ./server && yarn --production && yarn run build",
     "dev-server": "webpack-dev-server --colors --progress",
     "server": "cd ./server && yarn serve",
     "start": "npm run server"
