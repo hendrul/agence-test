@@ -129,7 +129,7 @@ function processActionCreators(actionCreators = {}, modulePath, metas, transitio
   return createActions(_set({}, modulePath, Object.keys(actionCreators).reduce((memo, key) => {
     let [payloadCreator, metaCreator] = [].concat(actionCreators[key])
     metaCreator = typeof metaCreator !== 'function' ? () => metaCreator : metaCreator
-    metaCreator = ((metaCreator, path, transitions, historyHandler) => () => {
+    metaCreator = ((metaCreator, path, transitions, historyHandler) => (...args) => {
       const history = historyHandler()
       if (!history) { console.warn('history instance is not available.') }
 
@@ -141,9 +141,9 @@ function processActionCreators(actionCreators = {}, modulePath, metas, transitio
       return _merge(
         {},
         metas,
-        metaCreator(...arguments),
+        metaCreator(...args),
         transition ? { transition } : {},
-        getMetasFromLastArgument(...arguments),
+        getMetasFromLastArgument(...args),
       )
     })(metaCreator, modulePath, transitions, historyHandler)
     return { ...memo, [key]: [payloadCreator, metaCreator] }
@@ -162,7 +162,7 @@ function processSideEffects(sideEffects = {}, modulePath, metas) {
       // Wrap sideEffects to pass actions as "this"
         new Promise(() => sideEffects[key](...args)),
       // Metadata Creator
-      () => _merge(metas, getMetasFromLastArgument(...arguments)),
+      (...args) => _merge(metas, getMetasFromLastArgument(...args)),
     ])(sideEffects),
   }), {})))
 }
@@ -201,18 +201,18 @@ function processSelectors(selectors = {}, modulePath) {
 function bindActionCreators(actionCreators = {}, dispatchHandler) {
   return _merge({}, actionCreators, (objValue, srcValue) => {
     if (typeof srcValue === 'function') {
-      return function () {
+      return function (...args) {
         const dispatch = dispatchHandler()
         if (typeof dispatch !== 'function') { throw new Error('Dispatch function is not available, I need one.') }
-        dispatch(srcValue(...arguments))
+        dispatch(srcValue(...args))
       }
     }
   })
 }
 
-function getMetasFromLastArgument() {
+function getMetasFromLastArgument(...args) {
   // If last argument is an object, keys starting with $ sign are taken as metas
-  const opts = [...arguments].slice(-1)
+  const opts = [...args].slice(-1)
   if (!_isPlainObject(opts)) return {}
   return Object.keys(opts)
     .filter(key => /^\$/.test(key))
