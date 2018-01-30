@@ -74,7 +74,11 @@ module.exports.default = (sequelize: Sequelize): Model => {
           )
           const grouped = _.groupBy(dataset, 'refmes')
           _.forEach(grouped, (value, key) => {
-            grouped[key] = _.groupBy(grouped[key], 'codigo')
+            const grouped2 = _.groupBy(grouped[key], 'codigo')
+            _.forEach(grouped2, (value2, key2) => {
+              grouped2[key2] = value2.map(d => _.omit(d, 'refmes', 'codigo'))
+            })
+            grouped[key] = grouped2
           })
           return grouped
         },
