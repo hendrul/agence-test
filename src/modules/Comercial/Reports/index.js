@@ -1,34 +1,32 @@
 import * as React from 'react'
 import ui from 'redux-ui'
+import { LOCATION_CHANGE } from 'react-router-redux'
+import { connect } from 'react-redux'
 
 import Reports from 'shared/components/reports'
-import PerformaceReport from './performance.rpt.jsx'
+import PerformanceReport from './performance'
 
-const { Report } = Reports
 
 @ui({
-  key: 'comercial',
   state: {
     selectedReport: '',
   },
   reducer: (state, { type, payload: location }) => {
     if (type === LOCATION_CHANGE) {
-      return {
-        ...state,
-        ...location.state,
-      }
+      state = state.merge(location.state)
     }
     return state
   },
 })
-class ComercialReports extends React.Component {
+class ComercialReports extends React.PureComponent {
   render() {
     return (
       <Reports>
-        <Report name="Comercial Performace" component={PerformaceReport} />
+        <PerformanceReport icon={<PerformanceReport.Icon />} title="Performance Comercial" />
       </Reports>
     )
   }
 }
 
-export default ComercialReports
+
+export default connect()(ComercialReports)

@@ -5,7 +5,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Provider } from 'react-redux'
-import 'react-table/react-table.css'
 
 import Menu from 'shared/components/drawer-menu'
 import AppContainer from 'shared/components/app-container'

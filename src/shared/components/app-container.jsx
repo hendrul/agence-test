@@ -65,7 +65,7 @@ type Props = {
   //   return state
   // },
 })
-class AppContainer extends React.Component<Props> {
+class AppContainer extends React.PureComponent<Props> {
   static defaultProps = {
     openMenu: true,
     paddingLeft: 255,

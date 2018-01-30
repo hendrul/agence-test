@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 export default {
   entry: [
     'babel-polyfill',
+    'react-table/react-table.css',
     `${__dirname}/src/app.jsx`,
   ],
   target: 'web',

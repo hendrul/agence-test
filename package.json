@@ -17,13 +17,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axs": "v1.0.6",
+    "accounting": "^0.4.1",
+    "axs": "1.0.6",
     "babel-runtime": "^6.26.0",
+    "dateformat": "^3.0.2",
     "grid-styled": "^2.0.0-10",
     "history": "^4.7.2",
+    "immutable": "3.7.5",
     "lodash": "^4.17.4",
-    "material-ui": "^0.18.7",
+    "material-ui": "^0.20.0",
     "material-ui-scrollable-tabs": "^1.0.0",
+    "material-ui-superselectfield": "^1.8.5",
+    "moment": "^2.20.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-icons": "^2.2.5",
@@ -46,6 +51,7 @@
     "styled-components": "^2.1.2",
     "styled-system": "^1.0.0-13",
     "superagent": "^3.6.3",
+    "twix": "^1.2.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
