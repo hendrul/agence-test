@@ -1,6 +1,6 @@
 {
   "name": "agence",
-  "version": "1.1.0",
+  "version": "1.5.0",
   "description": "CAOL Agence",
   "main": "public/bundle.js",
   "engines": {

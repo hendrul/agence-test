@@ -1,6 +1,6 @@
 {
   "name": "agence-server",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Agence Backend",
   "scripts": {
     "test": "mocha -r flow-remove-types/register --timeout 5000 --ui bdd src/**/__tests__/**/*.js",
