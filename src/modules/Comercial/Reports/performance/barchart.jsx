@@ -5,10 +5,12 @@ import _uniq from 'lodash/uniq'
 import _pick from 'lodash/pick'
 import _sortBy from 'lodash/sortBy'
 import _groupBy from 'lodash/groupBy'
+import accounting from 'accounting'
 import moment from 'moment/moment'
 import 'twix'
 
 import * as utils from './utils'
+import { CurrencyCell } from 'shared/components/styled-react-table'
 
 export default ({
   data, width = 600, height = 300, ...props
@@ -25,8 +27,8 @@ export default ({
         <XAxis dataKey="refmes" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
+        <Tooltip formatter={value => accounting.formatMoney(value, 'R$ ', 2, '.', ',')} />
+        <Legend content={payload => <CurrencyCell>{payload}</CurrencyCell>} />
         {userCodes.map(code => (
           <Bar key={code} dataKey={code} fill={utils.getRandomColor()} />
         ))}
