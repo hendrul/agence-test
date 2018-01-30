@@ -1,7 +1,8 @@
-/* eslint-disable no-tabs */
+/* eslint-disable no-tabs,function-paren-newline,indent */
 // @flow
 const { Sequelize, Model, DataTypes } = require('sequelize')
 const { Options, Attributes } = require('sequelize-decorators')
+const _ = require('lodash')
 
 module.exports.default = (sequelize: Sequelize): Model => {
   const { models } = sequelize
@@ -25,49 +26,58 @@ module.exports.default = (sequelize: Sequelize): Model => {
             required: true,
           },
         },
-        method: (usuarios = [], fecIni, fecFin) => sequelize.query(`
-          SELECT 
-              co_usuario codigo,
-              no_usuario usuario,
-              refmes,
-              receitaLiquida,
-              custoFixo,
-              comissao,
-              sum(receitaLiquida-(custoFixo+comissao)) lucro
-          FROM (
-             SELECT
-                 co_usuario,
-                 no_usuario,
-                 refmes,
-                 sum(receitaLiquida) receitaLiquida,
-                 custoFixo,
-                 sum(comissao) comissao
-             FROM (
-              SELECT cao_usuario.co_usuario co_usuario,
-                   cao_usuario.no_usuario no_usuario,
-                   cao_salario.brut_salario custoFixo,
-                   ${sequelize.options.dialect === 'sqlite' ? 'strftime("%Y-%m", cao_fatura.data_emissao) refmes,' : ''}
-                   ${sequelize.options.dialect === 'mysql' ? 'DATE_FORMAT(cao_fatura.data_emissao, "%Y-%m") refmes,' : ''}
-                   (cao_fatura.valor - (cao_fatura.valor * cao_fatura.total_imp_inc / 100)) receitaLiquida,
-                   ((cao_fatura.valor - cao_fatura.valor * cao_fatura.total_imp_inc / 100) * (cao_fatura.comissao_cn / 100)) comissao
-              FROM cao_usuario
-                JOIN permissao_sistema ON (cao_usuario.co_usuario = permissao_sistema.co_usuario)
-                JOIN (cao_os
-                   JOIN cao_fatura ON (cao_os.co_os = cao_fatura.co_os)
-                ) ON ( cao_usuario.co_usuario = cao_os.co_usuario )
-                JOIN cao_salario ON (cao_usuario.co_usuario = cao_salario.co_usuario)
-              WHERE permissao_sistema.co_sistema = 1
-              AND permissao_sistema.in_ativo = 'S'
-              AND permissao_sistema.co_tipo_usuario IN (0,1,2)
-              ${usuarios.length ? `AND cao_usuario.co_usuario IN ('${usuarios.join('\',\'')}')` : ''}
-              AND cao_fatura.data_emissao BETWEEN '${fecIni}'
-                                              AND '${fecFin}'
-            )	AS r1
-            GROUP BY co_usuario, no_usuario, refmes, custoFixo
-          ) AS r2
-          GROUP BY codigo, usuario, refmes, custoFixo, receitaLiquida, comissao
-          ORDER BY refmes
-          `, { type: sequelize.QueryTypes.SELECT }),
+        method: async (usuarios = [], fecIni, fecFin) => {
+          const dataset = await sequelize.query(`
+            SELECT 
+                co_usuario codigo,
+                no_usuario usuario,
+                refmes,
+                receitaLiquida,
+                custoFixo,
+                comissao,
+                sum(receitaLiquida-(custoFixo+comissao)) lucro
+            FROM (
+               SELECT
+                   co_usuario,
+                   no_usuario,
+                   refmes,
+                   sum(receitaLiquida) receitaLiquida,
+                   custoFixo,
+                   sum(comissao) comissao
+               FROM (
+                SELECT cao_usuario.co_usuario co_usuario,
+                     cao_usuario.no_usuario no_usuario,
+                     cao_salario.brut_salario custoFixo,
+                     ${sequelize.options.dialect === 'sqlite' ? 'strftime("%Y-%m", cao_fatura.data_emissao) refmes,' : ''}
+                     ${sequelize.options.dialect === 'mysql' ? 'DATE_FORMAT(cao_fatura.data_emissao, "%Y-%m") refmes,' : ''}
+                     (cao_fatura.valor - (cao_fatura.valor * cao_fatura.total_imp_inc / 100)) receitaLiquida,
+                     ((cao_fatura.valor - cao_fatura.valor * cao_fatura.total_imp_inc / 100) * (cao_fatura.comissao_cn / 100)) comissao
+                FROM cao_usuario
+                  JOIN permissao_sistema ON (cao_usuario.co_usuario = permissao_sistema.co_usuario)
+                  JOIN (cao_os
+                     JOIN cao_fatura ON (cao_os.co_os = cao_fatura.co_os)
+                  ) ON ( cao_usuario.co_usuario = cao_os.co_usuario )
+                  JOIN cao_salario ON (cao_usuario.co_usuario = cao_salario.co_usuario)
+                WHERE permissao_sistema.co_sistema = 1
+                AND permissao_sistema.in_ativo = 'S'
+                AND permissao_sistema.co_tipo_usuario IN (0,1,2)
+                ${usuarios.length ? `AND cao_usuario.co_usuario IN ('${usuarios.join('\',\'')}')` : ''}
+                AND cao_fatura.data_emissao BETWEEN '${fecIni}'
+                                                AND '${fecFin}'
+              )	AS r1
+              GROUP BY co_usuario, no_usuario, refmes, custoFixo
+            ) AS r2
+            GROUP BY codigo, usuario, refmes, custoFixo, receitaLiquida, comissao
+            ORDER BY refmes
+            `,
+            { type: sequelize.QueryTypes.SELECT },
+          )
+          const grouped = _.groupBy(dataset, 'refmes')
+          _.forEach(grouped, (value, key) => {
+            grouped[key] = _.groupBy(grouped[key], 'codigo')
+          })
+          return grouped
+        },
       },
     },
     validate: {
