@@ -1,6 +1,6 @@
 import React from 'react'
 import _Paper from 'material-ui/Paper'
-import styledMuiHoc from 'styled-mui-hoc'
+import styledMuiHoc from 'shared/components/styled-mui-hoc'
 import styled  from 'styled-components'
 
 export default styled(styledMuiHoc(_Paper)).attrs({

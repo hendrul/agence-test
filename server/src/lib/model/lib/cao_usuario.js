@@ -12,6 +12,10 @@ module.exports.default = (sequelize: Sequelize): Model => {
       comercialPerformance: {
         slug: 'comercial_performance',
         args: {
+          usuarios: {
+            type: 'array',
+            required: false,
+          },
           fecIni: {
             type: 'date',
             required: true,
@@ -21,7 +25,7 @@ module.exports.default = (sequelize: Sequelize): Model => {
             required: true,
           },
         },
-        method: (fecIni, fecFin) => sequelize.query(`
+        method: (usuarios = [], fecIni, fecFin) => sequelize.query(`
           SELECT 
               co_usuario codigo,
               no_usuario usuario,
@@ -55,6 +59,7 @@ module.exports.default = (sequelize: Sequelize): Model => {
               WHERE permissao_sistema.co_sistema = 1
               AND permissao_sistema.in_ativo = 'S'
               AND permissao_sistema.co_tipo_usuario IN (0,1,2)
+              ${usuarios.length ? `AND cao_usuario.co_usuario IN ('${usuarios.join('\',\'')}')` : ''}
               AND cao_fatura.data_emissao BETWEEN '${fecIni}'
                                               AND '${fecFin}'
             )	AS r1

@@ -1,6 +1,6 @@
 {
   "name": "agence",
-  "version": "1.1.0",
+  "version": "1.5.0",
   "description": "CAOL Agence",
   "main": "public/bundle.js",
   "engines": {
@@ -9,21 +9,26 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --colors",
-    "postinstall": "yarn run build && cd ./server && yarn --production && yarn run build",
+    "heroku-postbuild": "yarn run build && cd ./server && yarn --production && yarn run build",
     "dev-server": "webpack-dev-server --colors --progress",
     "server": "cd ./server && yarn serve",
-    "start": "npm run server"
+    "start": "if [ $NODE_ENV = development ]; then cd server && yarn start; else yarn run server; fi"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axs": "v1.0.6",
+    "accounting": "^0.4.1",
+    "axs": "1.0.6",
     "babel-runtime": "^6.26.0",
+    "dateformat": "^3.0.2",
     "grid-styled": "^2.0.0-10",
     "history": "^4.7.2",
+    "immutable": "3.7.5",
     "lodash": "^4.17.4",
-    "material-ui": "^0.18.7",
+    "material-ui": "^0.20.0",
     "material-ui-scrollable-tabs": "^1.0.0",
+    "material-ui-superselectfield": "^1.8.5",
+    "moment": "^2.20.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-icons": "^2.2.5",
@@ -37,6 +42,7 @@
     "react-table": "^6.5.3",
     "react-tap-event-plugin": "^2.0.1",
     "react-x-ray": "^1.0.0-2",
+    "recharts": "^1.0.0-beta.9",
     "reduce-reducers": "^0.1.2",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
@@ -45,6 +51,7 @@
     "styled-components": "^2.1.2",
     "styled-system": "^1.0.0-13",
     "superagent": "^3.6.3",
+    "twix": "^1.2.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
@@ -73,7 +80,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-react": "^7.5.1",
-    "extract-loader": "^1.0.1",
+    "extract-loader": "1.0.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "flow-bin": "^0.54.1",

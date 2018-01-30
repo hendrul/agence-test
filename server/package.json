@@ -1,14 +1,17 @@
 {
   "name": "agence-server",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Agence Backend",
   "scripts": {
-    "test": "jest",
+    "test": "mocha -r flow-remove-types/register --timeout 5000 --ui bdd src/**/__tests__/**/*.js",
     "build": "babel src/ -d build",
-    "genmodel": "rm -rf src/model/generated; sequelize-auto -h localhost -u root -x root -d agence -e mysql -o 'src/model/generated'",
+    "genmodel": "sh ./bin/genmodel.sh",
     "serve": "node build/server.js",
-    "start": "nodemon --exec babel-node -- src/server.js",
-    "debug": "nodemon --exec babel-node --inspect -- src/server.js"
+    "start": "babel-node src/server.js",
+    "debug": "babel-node --inspect src/server.js"
+  },
+  "bin": {
+    "genmodel": "./bin/genmodel.sh"
   },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -46,6 +49,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "chokidar": "^2.0.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -54,11 +58,13 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.54.1",
     "flow-cli": "^0.0.0-pre",
-    "jest": "^20.0.4",
+    "flow-remove-types": "^1.2.3",
+    "mocha": "^5.0.0",
     "mysql": "^2.15.0",
-    "nodemon": "^1.14.11",
     "pg": "^7.4.1",
     "sequelize-auto": "^0.4.29",
+    "sinon": "^4.2.0",
+    "sinon-chai": "^2.14.0",
     "webpack": "^3.7.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.19.1"

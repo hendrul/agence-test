@@ -3,7 +3,7 @@ const { ServerResponse } = require('http')
 const HTTPStatus = require('http-status')
 
 const sendHttpError = async (httpCode, msg, res) => {
-  if (msg instanceof ServerResponse) {
+  if ( msg instanceof ServerResponse ) {
     res = msg
     msg = undefined
   }

@@ -89,7 +89,7 @@ const generateCRUDService = (model, path) => {
             if (rptArg.required && !req.query[argName]) {
               await throwHttpError(422, `El reporte "${report}" require el argumento "${argName}"`)
             }
-            return memo.concat(req.query[argName])
+            return memo.concat([req.query[argName]])
           }, [])
         }
         const result = await reports[report].method(...validArgs)
